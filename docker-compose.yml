@@ -1,21 +1,32 @@
-# Specify the version of the docker-compose file format
-version: "1"
+version: "3.3"
 
-# Define the services (containers) that make up your application
 services:
-  # The name of the service, which can be used as a hostname within the network
-  flaskblog:
-    # The image to use for this service, either from a registry or built locally
-    image: dogukanurker/flaskblog:latest
-    # The name of the container created from this service
-    container_name: flaskblog
-    # The policy to apply when the container exits (always restart, unless stopped by the user)
+  nginx:
+    container_name: nginx
+    image: nginx:latest
     restart: always
-    # The path to the Dockerfile to build the image, if it does not exist in the registry
-    build: .
-    # The ports to expose from the container to the host (host_port:container_port)
     ports:
-      - 5000:5000
-    # The volumes to mount from the host to the container (host_path:container_path)
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/configs/flaskblog.conf:/etc/nginx/conf.d/flaskblog.conf
+      - ./nginx/data/certbot/conf:/etc/letsencrypt
+      - ./nginx/data/certbot/www:/var/www/certbot
+    depends_on:
+      - flaskblog
+
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./nginx/data/certbot/conf:/etc/letsencrypt
+      - ./nginx/data/certbot/www:/var/www/certbot
+
+  flaskblog:
+    build: .
+    container_name: flaskblog
+    restart: always
+#    ports:
+#      - 5000:5000
     volumes:
       - .:/app
