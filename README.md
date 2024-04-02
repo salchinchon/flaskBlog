@@ -10,7 +10,7 @@ chmod +x init-letsencrypt.sh && ./init-letsencrypt.sh
 ```
 После получения сертификата, нужно настроить ssl в конфигурационном фале nginx:
 ```sh
-nano flaskBlog/nginx/config/flaskblog.conf.template
+nano nginx/config/flaskblog.conf.template
 ```
 Вы можете добавить какой то свой блок, или раскоментировать имеющейся там. После чего перезапустите контейнеры:
 ```sh
