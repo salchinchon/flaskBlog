@@ -19,9 +19,9 @@ docker-compose restart
 ## Бэкап и восстановление 
 Чтобы сделать бэкап SQLite, достаточно куда скопировать каталог db находящейся в корне проекта, желательно при выключенном контейнере:
 ```sh
-cp -r flaskBlog/db ~/backup
+cp -r db ~/backup
 ```
 По аналогии, чтобы восстановить из бэкапа базу, перенести файлы бд в каталог db в корне проекта:
 ```sh
-rm -rf flaskBlog/db && cp -r ~/backup/db flaskBlog/
+rm -rf db && cp -r ~/backup/db flaskBlog/
 ```
