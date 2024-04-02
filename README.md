@@ -6,8 +6,7 @@
 
 Для получения сертификатов letsencrypt используется крипт init-letsencrypt.sh, выдайте ему права на исполнение и запустите:
 ```sh
-chmod +x flaskBlog/init-letsencrypt.sh
-./flaskBlog/init-letsencrypt.sh
+chmod +x flaskBlog/init-letsencrypt.sh && ./flaskBlog/init-letsencrypt.sh
 ```
 После получения сертификата, нужно настроить ssl в конфигурационном фале nginx:
 ```sh
