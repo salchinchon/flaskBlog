@@ -9,9 +9,10 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/configs/flaskblog.conf:/etc/nginx/conf.d/flaskblog.conf
+      - ./nginx/configs/flaskblog.conf.template:/etc/nginx/templates/flaskblog.conf.template
       - ./nginx/data/certbot/conf:/etc/letsencrypt
       - ./nginx/data/certbot/www:/var/www/certbot
+    env_file: .env
     depends_on:
       - flaskblog
 
